@@ -27,6 +27,21 @@ function computerPlay() {
   return computerSelection;
 }
 
+function playAgain() {
+  restart = prompt("Do you want to play again? (Y / N)").toLowerCase();
+  switch (restart) {
+    case "y":
+      rockPaperScissors();
+      break;
+    case "n":
+      alert("See you later!");
+      break;
+    default:
+      alert("I didn't get that. Try again!");
+      playAgain();
+  }
+}
+
 function rockPaperScissors() {
   alert("Press OK to start");
   let playerWins = 0;
@@ -103,6 +118,7 @@ function rockPaperScissors() {
     );
     console.log("Guess what!? We don't have a winner!");
   }
+  playAgain();
 }
 
 rockPaperScissors();

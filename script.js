@@ -1,4 +1,34 @@
-rockPaperScissors();
+function playerSelectionValidator() {
+  playerSelection = prompt("Make your choice: Rock, Paper or Scissors?");
+
+  if (playerSelection === null) {
+    return;
+  } else {
+    playerSelection = playerSelection.toLowerCase();
+    switch (playerSelection) {
+      case "rock":
+        break;
+      case "paper":
+        break;
+      case "scissors":
+        break;
+      default:
+        alert("Oops... Not a valid option!");
+        playerSelectionValidator();
+    }
+    return playerSelection;
+  }
+}
+
+function computerPlay() {
+  let n = Math.random();
+  n < 0.34
+    ? (computerSelection = "rock")
+    : n < 0.67
+    ? (computerSelection = "paper")
+    : (computerSelection = "scissors");
+  return computerSelection;
+}
 
 function rockPaperScissors() {
   alert("Press OK to start");
@@ -86,38 +116,6 @@ function rockPaperScissors() {
   playAgain();
 }
 
-function playerSelectionValidator() {
-  playerSelection = prompt("Make your choice: Rock, Paper or Scissors?");
-
-  if (playerSelection === null) {
-    return;
-  } else {
-    playerSelection = playerSelection.toLowerCase();
-    switch (playerSelection) {
-      case "rock":
-        break;
-      case "paper":
-        break;
-      case "scissors":
-        break;
-      default:
-        alert("Oops... Not a valid option!");
-        playerSelectionValidator();
-    }
-    return playerSelection;
-  }
-}
-
-function computerPlay() {
-  let n = Math.random();
-  n < 0.34
-    ? (computerSelection = "rock")
-    : n < 0.67
-    ? (computerSelection = "paper")
-    : (computerSelection = "scissors");
-  return computerSelection;
-}
-
 function playAgain() {
   restart = prompt("Do you want to play again? (Y / N)");
   if (restart === null) {
@@ -137,3 +135,5 @@ function playAgain() {
     }
   }
 }
+
+rockPaperScissors();

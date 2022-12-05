@@ -9,7 +9,9 @@ function rockPaperScissors() {
     playerSelectionValidator();
 
     if (playerSelection === null) {
-      return alert("Ok. I got it. You don't want to play.");
+      return alert(
+        "Ok. I got it. You don't want to play. If you change your mind, click ok and reload the page. Thank you! :)"
+      );
     } else {
       console.log(`Player selection is: ${playerSelection}`);
 

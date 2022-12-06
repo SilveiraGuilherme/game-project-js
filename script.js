@@ -1,5 +1,35 @@
-let playerWins = 0;
-let computerWins = 0;
+let playerWins;
+let computerWins;
+
+function game() {
+  alert("Press OK to start");
+  playerWins = 0;
+  computerWins = 0;
+
+  for (let i = 0; i < 5; i++) {
+    playerSelectionValidator();
+
+    if (playerSelection === null) {
+      return alert(
+        "Ok. I got it. You don't want to play. If you change your mind, click ok and reload the page. Thank you! :)"
+      );
+    } else {
+      computerPlay();
+
+      console.log(`Player selection is: ${playerSelection}`);
+      console.log(`Computer selection is: ${computerSelection}`);
+
+      attemptMsg = `Attempt ${i + 1} of 5
+        You: ${playerSelection}  x  Computer: ${computerSelection}\n`;
+
+      playRound(playerSelection, computerSelection);
+    }
+  }
+
+  finalResult(playerWins, computerWins);
+
+  playAgain();
+}
 
 function playerSelectionValidator() {
   playerSelection = prompt("Make your choice: Rock, Paper or Scissors?");
@@ -77,34 +107,6 @@ function playRound(playerSelection, computerSelection) {
       `${attemptMsg}\nIt's a tie! Nobody wins.\n      You ${playerWins}  x  Computer ${computerWins}`
     );
   console.log(`Player ${playerWins} x Computer ${computerWins}`);
-}
-
-function game() {
-  alert("Press OK to start");
-
-  for (let i = 0; i < 5; i++) {
-    playerSelectionValidator();
-
-    if (playerSelection === null) {
-      return alert(
-        "Ok. I got it. You don't want to play. If you change your mind, click ok and reload the page. Thank you! :)"
-      );
-    } else {
-      console.log(`Player selection is: ${playerSelection}`);
-
-      computerPlay();
-      console.log(`Computer selection is: ${computerSelection}`);
-
-      attemptMsg = `Attempt ${i + 1} of 5
-      You: ${playerSelection}  x  Computer: ${computerSelection}\n`;
-    }
-
-    playRound(playerSelection, computerSelection);
-  }
-
-  finalResult(playerWins, computerWins);
-
-  playAgain();
 }
 
 function finalResult(playerWins, computerWins) {

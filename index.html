@@ -5,7 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock, Paper or Scissors</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <h1>Rock Paper Scissors<br /></h1>
+      <section class="choices-container">
+        <h2>Make your choice</h2>
+        <ul class="choices">
+          <li>
+            <button type="button" value="rock">
+              <img src="img/rock.png" alt="A picture of a rock" />
+            </button>
+          </li>
+          <li>
+            <button type="button" value="paper">
+              <img src="img/paper.png" alt="A piece of paper" />
+            </button>
+          </li>
+          <li>
+            <button type="button" value="scissors">
+              <img src="img/scissors.png" alt="A picture of scissors" />
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section class="results-container">
+        <ul class="results">
+          <li id="attempt"></li>
+          <li id="results"></li>
+          <li id="score"></li>
+        </ul>
+        <p id="msgRound"></p>
+      </section>
+      <section class="playAgain">
+        <h2 id="finalResult"></h2>
+        <button type="button"></button>
+      </section>
+    </main>
+  </body>
 </html>

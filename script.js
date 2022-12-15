@@ -1,59 +1,41 @@
-let playerWins;
-let computerWins;
+let playerWins = 0,
+  computerWins = 0,
+  round = 0,
+  playerSelection = null,
+  computerSelection = null;
+
+const btnChoices = document.querySelectorAll(".choices button"),
+  resultsContainer = document.querySelector(".results-container"),
+  results = document.querySelectorAll(".results li"),
+  msgRound = document.querySelector("#msgRound"),
+  msgFinalResult = document.querySelector("#finalResult"),
+  playAgainContainer = document.querySelector(".playAgain"),
+  btnPlayAgain = document.querySelector(".playAgain button");
+
+btnChoices.forEach((btnChoice) => {
+  btnChoice.addEventListener("click", () => {
+    playerSelection = btnChoice.value;
+    round++;
+    if (round <= 5) {
+      game();
+    }
+  });
+});
 
 function game() {
-  alert("Press OK to start");
-  playerWins = 0;
-  computerWins = 0;
+  computerChoice();
+  playRound(playerSelection, computerSelection);
+  roundResult();
+  resultsContainer.style.visibility = "visible";
 
-  for (let i = 0; i < 5; i++) {
-    playerSelectionValidator();
-
-    if (playerSelection === null) {
-      return alert(
-        "Ok. I got it. You don't want to play. If you change your mind, click ok and reload the page. Thank you! :)"
-      );
-    } else {
-      computerPlay();
-
-      console.log(`Player selection is: ${playerSelection}`);
-      console.log(`Computer selection is: ${computerSelection}`);
-
-      attemptMsg = `Attempt ${i + 1} of 5
-        You: ${playerSelection}  x  Computer: ${computerSelection}\n`;
-
-      playRound(playerSelection, computerSelection);
-    }
-  }
-
-  finalResult(playerWins, computerWins);
-
-  playAgain();
-}
-
-function playerSelectionValidator() {
-  playerSelection = prompt("Make your choice: Rock, Paper or Scissors?");
-
-  if (playerSelection === null) {
-    return;
-  } else {
-    playerSelection = playerSelection.toLowerCase().trim();
-    switch (playerSelection) {
-      case "rock":
-        break;
-      case "paper":
-        break;
-      case "scissors":
-        break;
-      default:
-        alert("Oops... Not a valid option!");
-        playerSelectionValidator();
-    }
-    return playerSelection;
+  if (round === 5) {
+    playAgainContainer.style.visibility = "visible";
+    finalResult(playerWins, computerWins);
+    playAgain();
   }
 }
 
-function computerPlay() {
+function computerChoice() {
   let n = Math.random();
   n < 0.34
     ? (computerSelection = "rock")
@@ -64,88 +46,62 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection !== computerSelection) {
+  const msgWinner = `You got it, ${playerSelection} beats ${computerSelection}.`;
+  const msgLoser = `Poor you, ${computerSelection} beats ${playerSelection}.`;
+  const msgTie = `It's a tie! Nobody wins.`;
+
+  if (playerSelection === computerSelection) {
+    msgRound.textContent = msgTie;
+  } else {
     if (playerSelection === "rock") {
-      if (computerSelection === "scissors") {
-        playerWins++;
-        alert(
-          `${attemptMsg}\nYou got it, ${playerSelection} beats ${computerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      } else {
-        computerWins++;
-        alert(
-          `${attemptMsg}\nPoor you, ${computerSelection} beats ${playerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      }
+      computerSelection === "scissors"
+        ? (playerWins++, (msgRound.textContent = msgWinner))
+        : (computerWins++, (msgRound.textContent = msgLoser));
     } else if (playerSelection === "paper") {
-      if (computerSelection === "rock") {
-        playerWins++;
-        alert(
-          `${attemptMsg}\nYou got it, ${playerSelection} beats ${computerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      } else {
-        computerWins++;
-        alert(
-          `${attemptMsg}\nPoor you, ${computerSelection} beat ${playerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      }
+      computerSelection === "rock"
+        ? (playerWins++, (msgRound.textContent = msgWinner))
+        : (computerWins++, (msgRound.textContent = msgLoser));
     } else if (playerSelection === "scissors") {
-      if (computerSelection === "paper") {
-        playerWins++;
-        alert(
-          `${attemptMsg}\nYou got it, ${playerSelection} beat ${computerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      } else {
-        computerWins++;
-        alert(
-          `${attemptMsg}\nPoor you, ${computerSelection} beats ${playerSelection}.\n      You ${playerWins}  x  Computer ${computerWins}`
-        );
-      }
+      computerSelection === "paper"
+        ? (playerWins++, (msgRound.textContent = msgWinner))
+        : (computerWins++, (msgRound.textContent = msgLoser));
     }
-  } else
-    alert(
-      `${attemptMsg}\nIt's a tie! Nobody wins.\n      You ${playerWins}  x  Computer ${computerWins}`
-    );
-  console.log(`Player ${playerWins} x Computer ${computerWins}`);
+  }
+}
+
+function roundResult() {
+  results.forEach((btnResult) => {
+    switch (btnResult.id) {
+      case "attempt":
+        btnResult.textContent = `Attempt ${round} of 5`;
+        break;
+      case "results":
+        btnResult.textContent = `You chose ${playerSelection} and the computer chose ${computerSelection}`;
+        break;
+      case "score":
+        btnResult.textContent = `You: ${playerWins}  x  Computer: ${computerWins}\n`;
+        break;
+    }
+  });
 }
 
 function finalResult(playerWins, computerWins) {
-  if (playerWins > computerWins) {
-    alert(
-      `Congrats! You are the winner.\nYou ${playerWins}  x  Computer ${computerWins}`
-    );
-    console.log("Congrats! You are the winner.");
-  } else if (computerWins > playerWins) {
-    alert(
-      `Better luck next time! :(\nYou ${playerWins}  x  Computer ${computerWins}`
-    );
-    console.log("Better luck next time! :(");
-  } else {
-    alert(
-      `Guess what!? We don't have a winner!\nYou ${playerWins}  x  Computer ${computerWins}`
-    );
-    console.log("Guess what!? We don't have a winner!");
-  }
+  playerWins > computerWins
+    ? (msgFinalResult.textContent = `Congrats! You are the winner!`)
+    : computerWins > playerWins
+    ? (msgFinalResult.textContent = `Better luck next time! :(`)
+    : (msgFinalResult.textContent = `Guess what!? We don't have a winner!`);
 }
 
 function playAgain() {
-  restart = prompt("Do you want to play again? (Y / N)");
-  if (restart === null) {
-    return;
-  } else {
-    restart = restart.toLowerCase().trim();
-    switch (restart) {
-      case "y":
-        game();
-        break;
-      case "n":
-        alert("See you later!");
-        break;
-      default:
-        alert("I didn't get that. Try again!");
-        playAgain();
-    }
-  }
+  btnPlayAgain.textContent = "Play Again";
+  btnPlayAgain.addEventListener("click", () => {
+    resultsContainer.style.visibility = "hidden";
+    playAgainContainer.style.visibility = "hidden";
+    playerWins = 0;
+    computerWins = 0;
+    round = 0;
+    playerSelection = null;
+    computerSelection = null;
+  });
 }
-
-game();

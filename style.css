@@ -35,6 +35,9 @@ h1,
 h2 {
   text-align: center;
 }
+h1 span {
+  color: rgb(12, 12, 12);
+}
 button {
   outline: none;
   background: none;

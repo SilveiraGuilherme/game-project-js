@@ -110,9 +110,6 @@ button img:hover {
 }
 
 footer {
-  /* position: fixed;
-  bottom: 0;
-  width: 100vw; */
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

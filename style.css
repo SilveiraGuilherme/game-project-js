@@ -20,11 +20,17 @@
 }
 
 body {
-  background-color: #eeeeee;
-}
-main {
   display: flex;
   flex-direction: column;
+  background-color: #eeeeee;
+  height: 100vh;
+  margin: 0;
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 ul {
@@ -38,17 +44,20 @@ h2 {
 h1 span {
   color: rgb(12, 12, 12);
 }
+h2 {
+  margin: 0;
+}
 button {
   outline: none;
   background: none;
   border: none;
   cursor: pointer;
 }
-img {
+button img {
   width: 100px;
   height: auto;
 }
-img:hover {
+button img:hover {
   transform: rotate(20deg) scale(1.2, 1.2);
 }
 
@@ -61,6 +70,7 @@ img:hover {
   display: flex;
   justify-content: center;
   gap: 8%;
+  margin-bottom: 0;
 }
 .choices button {
   padding: 0;
@@ -75,9 +85,13 @@ img:hover {
   flex-direction: column;
   align-items: center;
   font-size: 20px;
+  margin-top: 0;
 }
 .results-container p {
   margin: 0;
+}
+.results li {
+  text-align: center;
 }
 
 .playAgain {
@@ -92,4 +106,57 @@ img:hover {
   font-size: medium;
   font-weight: bold;
   width: auto;
+  margin-top: 20px;
+}
+
+footer {
+  /* position: fixed;
+  bottom: 0;
+  width: 100vw; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+footer p {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 5px 20px;
+}
+address {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 5px 20px;
+  gap: 10px;
+}
+address a {
+  display: flex;
+  font-style: normal;
+}
+footer img {
+  height: 25px;
+  width: 25px;
+}
+
+@media (max-width: 550px) {
+  main {
+    justify-content: space-evenly;
+    margin: 0 5px;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  footer p {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  button img {
+    width: 80px;
+    height: auto;
+  }
 }
